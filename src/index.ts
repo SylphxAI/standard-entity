@@ -75,20 +75,20 @@ export interface StandardEntity<TName extends string = string, TData = unknown> 
 	 * Standard Entity marker with phantom types.
 	 * The `~` prefix is a convention indicating this is a protocol marker.
 	 */
-	readonly "~entity": {
+	readonly '~entity': {
 		/** Entity name as a string literal type */
-		readonly name: TName;
+		readonly name: TName
 		/**
 		 * Entity data type.
 		 * Can be `unknown` if type is inferred from `fields` property.
 		 */
-		readonly type: TData;
-	};
+		readonly type: TData
+	}
 	/**
 	 * Optional fields for type inference.
 	 * Libraries like Lens use this for field-based type inference.
 	 */
-	readonly fields?: unknown;
+	readonly fields?: unknown
 }
 
 // =============================================================================
@@ -107,13 +107,13 @@ export interface StandardEntity<TName extends string = string, TData = unknown> 
  */
 export function isStandardEntity(value: unknown): value is StandardEntity {
 	return (
-		typeof value === "object" &&
+		typeof value === 'object' &&
 		value !== null &&
-		"~entity" in value &&
-		typeof (value as StandardEntity)["~entity"] === "object" &&
-		(value as StandardEntity)["~entity"] !== null &&
-		"name" in (value as StandardEntity)["~entity"]
-	);
+		'~entity' in value &&
+		typeof (value as StandardEntity)['~entity'] === 'object' &&
+		(value as StandardEntity)['~entity'] !== null &&
+		'name' in (value as StandardEntity)['~entity']
+	)
 }
 
 // =============================================================================
@@ -128,7 +128,7 @@ export function isStandardEntity(value: unknown): value is StandardEntity {
  * type Name = InferEntityName<typeof User>;  // "User"
  * ```
  */
-export type InferEntityName<T> = T extends StandardEntity<infer N, unknown> ? N : never;
+export type InferEntityName<T> = T extends StandardEntity<infer N, unknown> ? N : never
 
 /**
  * Extract entity data type from StandardEntity.
@@ -142,7 +142,7 @@ export type InferEntityName<T> = T extends StandardEntity<infer N, unknown> ? N 
  * type Data = InferEntityType<typeof User>;  // { id: string; name: string; }
  * ```
  */
-export type InferEntityType<T> = T extends StandardEntity<string, infer D> ? D : never;
+export type InferEntityType<T> = T extends StandardEntity<string, infer D> ? D : never
 
 // =============================================================================
 // Utility Types for Implementers
@@ -160,10 +160,10 @@ export type InferEntityType<T> = T extends StandardEntity<string, infer D> ? D :
  * ```
  */
 export interface EntityMarker<TName extends string, TData = unknown> {
-	readonly "~entity": {
-		readonly name: TName;
-		readonly type: TData;
-	};
+	readonly '~entity': {
+		readonly name: TName
+		readonly type: TData
+	}
 }
 
 /**
@@ -177,4 +177,4 @@ export interface EntityMarker<TName extends string, TData = unknown> {
  * };
  * ```
  */
-export type SimpleEntity<TName extends string, TData> = EntityMarker<TName, TData>;
+export type SimpleEntity<TName extends string, TData> = EntityMarker<TName, TData>

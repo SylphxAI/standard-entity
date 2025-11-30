@@ -11,13 +11,16 @@
 			"import": "./dist/index.js"
 		}
 	},
-	"files": ["dist"],
+	"files": [
+		"dist"
+	],
 	"scripts": {
 		"build": "tsc",
 		"typecheck": "tsc --noEmit",
 		"lint": "biome check .",
 		"format": "biome format --write .",
-		"prepublishOnly": "echo 'Use CI to publish' && exit 1"
+		"prepublishOnly": "bunx @sylphx/doctor prepublish && echo 'Use CI to publish' && exit 1",
+		"test": "bun test"
 	},
 	"keywords": [
 		"standard-entity",
@@ -38,10 +41,13 @@
 		"url": "https://github.com/SylphxAI/standard-entity/issues"
 	},
 	"devDependencies": {
-		"@biomejs/biome": "^1.9.4",
+		"@biomejs/biome": "^2.3.8",
 		"@sylphx/biome-config": "^0.4.0",
+		"@sylphx/bump": "^1.4.11",
+		"@sylphx/doctor": "^1.26.0",
 		"@sylphx/tsconfig": "^0.3.0",
 		"@types/bun": "^1.2.17",
+		"lefthook": "^2.0.4",
 		"typescript": "^5.8.3"
 	}
 }

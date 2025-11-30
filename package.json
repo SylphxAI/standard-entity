@@ -1,0 +1,47 @@
+{
+	"name": "@sylphx/standard-entity",
+	"version": "0.1.0",
+	"description": "Standard Entity Protocol - Cross-library type-safe entity operations",
+	"type": "module",
+	"main": "dist/index.js",
+	"types": "dist/index.d.ts",
+	"exports": {
+		".": {
+			"types": "./dist/index.d.ts",
+			"import": "./dist/index.js"
+		}
+	},
+	"files": ["dist"],
+	"scripts": {
+		"build": "tsc",
+		"typecheck": "tsc --noEmit",
+		"lint": "biome check .",
+		"format": "biome format --write .",
+		"prepublishOnly": "echo 'Use CI to publish' && exit 1"
+	},
+	"keywords": [
+		"standard-entity",
+		"entity",
+		"protocol",
+		"type-safe",
+		"structural-typing",
+		"cross-library"
+	],
+	"author": "Sylphx",
+	"license": "MIT",
+	"repository": {
+		"type": "git",
+		"url": "https://github.com/SylphxAI/standard-entity.git"
+	},
+	"homepage": "https://github.com/SylphxAI/standard-entity",
+	"bugs": {
+		"url": "https://github.com/SylphxAI/standard-entity/issues"
+	},
+	"devDependencies": {
+		"@biomejs/biome": "^1.9.4",
+		"@sylphx/biome-config": "^0.4.0",
+		"@sylphx/tsconfig": "^0.3.0",
+		"@types/bun": "^1.2.17",
+		"typescript": "^5.8.3"
+	}
+}

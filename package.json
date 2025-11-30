@@ -19,7 +19,7 @@
 		"typecheck": "tsc --noEmit",
 		"lint": "biome check .",
 		"format": "biome format --write .",
-		"prepublishOnly": "bunx @sylphx/doctor prepublish && echo 'Use CI to publish' && exit 1",
+		"prepublishOnly": "bunx @sylphx/doctor prepublish",
 		"test": "bun test"
 	},
 	"keywords": [

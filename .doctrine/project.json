@@ -1,0 +1,137 @@
+{
+	"schemaVersion": 1,
+	"project": {
+		"repo": "SylphxAI/standard-entity",
+		"name": "Standard Entity",
+		"lifecycle": "production",
+		"layer": "foundation",
+		"summary": "Standard Entity is a TypeScript protocol package for structural, type-safe entity interoperability across libraries without direct library coupling.",
+		"goals": [
+			"Provide the @sylphx/standard-entity package, protocol marker, type helpers, type guard, README contract, and tests.",
+			"Allow entity producers and consumers to interoperate through structural typing without direct imports.",
+			"Keep package release evidence, public exports, and documentation aligned."
+		],
+		"nonGoals": [
+			"Own Lens, Reify, or downstream product entity models.",
+			"Encode consumer-specific persistence, validation, UI, workflow, or commercial behavior into the protocol package.",
+			"Publish package changes without CI proof and npm registry readback."
+		]
+	},
+	"boundaries": {
+		"owns": [
+			{
+				"name": "standard-entity-protocol",
+				"description": "The structural ~entity marker, StandardEntity interface, inference helpers, type guard, README contract, tests, and package metadata."
+			}
+		],
+		"doesNotOwn": [
+			"Downstream entity libraries, product data models, persistence schemas, validators, UI behavior, or workflow semantics.",
+			"Enterprise doctrine, organization reusable workflow internals, or package registry infrastructure.",
+			"Consumer-specific compatibility shims outside the published protocol contract."
+		],
+		"publicSurfaces": [
+			{
+				"type": "package-export",
+				"name": "@sylphx/standard-entity package",
+				"location": "package.json"
+			},
+			{
+				"type": "documentation",
+				"name": "Protocol README",
+				"location": "README.md"
+			},
+			{
+				"type": "workflow",
+				"name": "CI workflow",
+				"location": ".github/workflows/ci.yml"
+			},
+			{
+				"type": "workflow",
+				"name": "Release workflow",
+				"location": ".github/workflows/release.yml"
+			}
+		],
+		"allowedDependencies": [
+			{
+				"repo": "SylphxAI/doctrine",
+				"surface": "enterprise engineering doctrine",
+				"direction": "downward"
+			},
+			{
+				"repo": "SylphxAI/.github",
+				"surface": "organization reusable release workflow",
+				"direction": "downward"
+			}
+		],
+		"forbiddenCouplings": [
+			"Do not import or depend on Lens, Reify, or any consumer repository internals.",
+			"Do not add product-specific entity behavior to the shared protocol.",
+			"Do not publish package changes from a personal token or without registry readback."
+		]
+	},
+	"documentation": {
+		"adr": {
+			"path": "PROJECT.md",
+			"status": "planned"
+		},
+		"specs": {
+			"path": "README.md",
+			"status": "present"
+		},
+		"catalog": {
+			"path": "PROJECT.md",
+			"status": "present"
+		},
+		"runbooks": {
+			"path": "AGENTS.md",
+			"status": "present"
+		},
+		"generatedReferences": {
+			"path": "dist/",
+			"status": "generated"
+		}
+	},
+	"delivery": {
+		"ciModel": "legacy-ci",
+		"requiredContexts": ["ci"],
+		"deployPath": "No hosted deploy path is declared. Package release runs from main through .github/workflows/release.yml using the organization reusable release workflow.",
+		"productionProof": "ci workflow pass, release workflow completion for package publication, and npm registry readback for @sylphx/standard-entity.",
+		"recoveryClass": "forward-fix-only",
+		"packageRelease": {
+			"publishesPackages": true,
+			"ecosystems": ["npm"],
+			"releaseIntent": "The repository publishes the public @sylphx/standard-entity package through the repo-local release workflow.",
+			"versionPr": "Release/version changes are owned by the organization reusable release workflow and package release automation.",
+			"publisher": ".github/workflows/release.yml with inherited organization secrets and npm publish credentials.",
+			"requiredContexts": ["ci"],
+			"publishProof": "npm registry readback for @sylphx/standard-entity after a release workflow publishes a changed version."
+		}
+	},
+	"commercial": {
+		"status": "not-applicable",
+		"decisionHome": "not-applicable: foundation protocol package",
+		"pricingSourceOfTruth": "not-applicable: no direct pricing surface",
+		"metricsSourceOfTruth": "npm registry/readback and consuming product metrics, not this repository",
+		"requiredRecords": ["none"],
+		"guardrails": [
+			"Commercial packaging and pricing decisions belong to consuming products unless a future ADR changes this package's posture."
+		]
+	},
+	"adoption": {
+		"status": "baseline",
+		"gaps": [
+			{
+				"id": "adr29-admission",
+				"description": "Repository still uses a legacy CI workflow and has not adopted ADR-29 admission fan-in contexts.",
+				"owner": "SylphxAI/standard-entity",
+				"target": "before full doctrine adoption"
+			},
+			{
+				"id": "package-release-control-plane",
+				"description": "Package release proof should be reconciled with ADR-59 package release control-plane expectations when release automation is next changed.",
+				"owner": "SylphxAI/standard-entity",
+				"target": "before full package-release adoption"
+			}
+		]
+	}
+}

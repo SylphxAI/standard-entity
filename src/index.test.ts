@@ -6,7 +6,7 @@ import {
 	isStandardEntity,
 	type SimpleEntity,
 	type StandardEntity,
-} from './index'
+} from './index.js'
 
 describe('StandardEntity', () => {
 	test('isStandardEntity returns true for valid entity', () => {
@@ -68,7 +68,7 @@ describe('Type inference', () => {
 
 describe('EntityMarker', () => {
 	test('can create entity with EntityMarker', () => {
-		interface MyEntity<N extends string, D> extends EntityMarker<N, D> {
+		type MyEntity<N extends string, D> = EntityMarker<N, D> & {
 			readonly customProp: string
 		}
 
